@@ -2,4 +2,4 @@
 
 JUst a Nice Dice Game
 
-![Screen Shot](screenshot.jpg?raw=true "Optional Title")
+![Screen Shot](Capture.JPG?raw=true "Optional Title")
