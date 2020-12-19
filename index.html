@@ -1,85 +1,36 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <!-- Internal game scripts/styles, mostly boring stuff -->
-    <script src="/static/game-frame.js"></script>
-    <link rel="stylesheet" href="/static/game-frame-styles.css" />
- 
-    <!-- This is our database of messages -->
-    <script src="/static/post-store.js"></script>
-   
-    <script>
-      var defaultMessage = "Welcome!<br><br>This is your <i>personal</i>"
-        + " stream. You can post anything you want here, especially "
-        + "<span style='color: #f00ba7'>madness</span>.";
- 
-      var DB = new PostDB(defaultMessage);
- 
-      function displayPosts() {
-        var containerEl = document.getElementById("post-container");
-        containerEl.innerHTML = "";
- 
-        var posts = DB.getPosts();
-        for (var i=0; i<posts.length; i++) {
-          var html = '<table class="message"> <tr> <td valign=top> '
-            + '<img src="/static/level2_icon.png"> </td> <td valign=top '
-            + ' class="message-container"> <div class="shim"></div>';
- 
-          html += '<b>You</b>';
-          html += '<span class="date">' + new Date(posts[i].date) + '</span>';
-          html += "<blockquote>" + posts[i].message + "</blockquote";
-          html += "</td></tr></table>"
-          containerEl.innerHTML += html; 
-        }
-      }
- 
-      window.onload = function() { 
-        document.getElementById('clear-form').onsubmit = function() {
-          DB.clear(function() { displayPosts() });
-          return false;
-        }
- 
-        document.getElementById('post-form').onsubmit = function() {
-          var message = document.getElementById('post-content').value;
-          DB.save(message, function() { displayPosts() } );
-          document.getElementById('post-content').value = "";
-          return false;
-        }
- 
-        displayPosts();
-      }
- 
-    </script>
- 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Pig Game</title>
   </head>
- 
-  <body id="level2">
-    <div id="header">
-      <img src="/static/logos/level2.png" /> 
-      <div>Chatter from across the Web.</div>
-      <form action="?" id="clear-form">
-        <input class="clear" type="submit" value="Clear all posts">
-      </form>
-    </div>
- 
-    <div id="post-container"></div>
- 
-    <table class="message">
-      <tr>
-        <td valign="top">
-          <img src="/static/level2_icon.png">
-        </td>
-        <td class="message-container">
-          <div class="shim"></div>
-          <form action="?" id="post-form">
-            <textarea id="post-content" name="content" rows="2"
-              cols="50"></textarea>
-            <input class="share" type="submit" value="Share status!">
-            <input type="hidden" name="action" value="sign">
-          </form>
-        </td>
-      </tr>
-    </table>
- 
+  <body>
+    <main>
+      <section class="player player--0 player--active">
+        <h2 class="name" id="name--0">Player 1</h2>
+        <p class="score" id="score--0">43</p>
+        <div class="current">
+          <p class="current-label">Current</p>
+          <p class="current-score" id="current--0">0</p>
+        </div>
+      </section>
+      <section class="player player--1">
+        <h2 class="name" id="name--1">Player 2</h2>
+        <p class="score" id="score--1">24</p>
+        <div class="current">
+          <p class="current-label">Current</p>
+          <p class="current-score" id="current--1">0</p>
+        </div>
+      </section>
+
+      <img src="dice-5.png" alt="Playing dice" class="dice" />
+      <button class="btn btn--new">🔄 New game</button>
+      <button class="btn btn--roll">🎲 Roll dice</button>
+      <button class="btn btn--hold">📥 Hold</button>
+    </main>
+    <script src="script.js"></script>
   </body>
 </html>
